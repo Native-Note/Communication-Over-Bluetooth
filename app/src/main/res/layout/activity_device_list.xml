@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.nativenote.bluetoothcommunication.DeviceList">
+
+    <data>
+
+        <variable
+            name="callback"
+            type="com.nativenote.bluetoothcommunication.adapter.ActionClickCallback" />
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="isLoadingNew"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/parentPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvDeviceListPairedDeviceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#666"
+            android:paddingLeft="5dp"
+            android:text="@string/title_paired_devices"
+            android:textColor="#fff" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listPairedDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:stackFromBottom="true"
+                app:visibleGone="@{!isLoading}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/none_paired"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:visibleGone="@{isLoading}" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvDeviceListNewDeviceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#666"
+            android:paddingLeft="5dp"
+            android:text="@string/title_other_devices"
+            android:textColor="#fff" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listNewDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:stackFromBottom="true"
+                app:visibleGone="@{!isLoadingNew}" />
+
+            <TextView
+                android:id="@+id/emptyMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/none_found"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:visibleGone="@{isLoadingNew}" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnDeviceListScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() ->  callback.onClick()}"
+            android:text="@string/button_scan" />
+    </LinearLayout>
+</layout>
